@@ -164,11 +164,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4012511335118758, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.87
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4012511335118758, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.18
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: 4012511335118758, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
       propertyPath: m_LocalPosition.z
@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 1082315074}
   - component: {fileID: 1082315073}
   - component: {fileID: 1082315072}
+  - component: {fileID: 1082315076}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -244,7 +245,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.015462806, g: 0.040903743, b: 0.08088237, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -284,6 +285,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082315076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082315071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0363adfd01335c46ad06e513b8dcaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 2061149070}
+  - {fileID: 1818421123}
+  minOrtho: 5
+  paddingAmount: 0.25
 --- !u!1 &1818421123 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1359998915060098, guid: 049e0f2715be9ae41a66274ac415aa49,
@@ -306,3 +323,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &2061149070 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1285434909095400, guid: 71eeec92c05115042929507b9fa44981,
+    type: 2}
+  m_PrefabInternal: {fileID: 213246599}
