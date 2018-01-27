@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour {
 
     private Vector2 direction;
     private float maxVelocity = 5.0f;
+
 	void Start ()
 	{
 	    rigidbody = GetComponent<Rigidbody2D>();
@@ -26,17 +27,18 @@ public class PlayerInput : MonoBehaviour {
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
 
-	    if (Input.GetButton("Fire1"))
+	    if (Input.GetAxis("ThrusterGamePad"+playerID)>0.0f)
 	    {
-	        rigidbody.AddForce(direction);
-            
+	        rigidbody.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID));
+           
 	    }
 	    if (rigidbody.velocity.magnitude > maxVelocity)
 	    {
 
 	        rigidbody.velocity = (rigidbody.velocity / rigidbody.velocity.magnitude) * maxVelocity;
+           
 	    }
-
+        Debug.Log(rigidbody.velocity);
 	}
 
 }
