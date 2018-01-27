@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114910686972574322}
   - component: {fileID: 95306506969535552}
   - component: {fileID: 61017387437206076}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61017387437206076
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -118,6 +118,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
+  forceMult: 0
+  burstAmount: 4
+  burstDelay: 0.15
+  cooldown: 5
+  spreadInDegrees: 22.5
+  amount: 30
+  speed: 15
+  offset: 0.5
+  emittedObject: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
+    type: 2}
+  ripple: {fileID: 1571557450000666, guid: 8d1a7eac94bcd974ca3b08572a6d90bf, type: 2}
+  color: {r: 1, g: 0, b: 1, a: 1}
 --- !u!212 &212301371162476418
 SpriteRenderer:
   m_ObjectHideFlags: 1
