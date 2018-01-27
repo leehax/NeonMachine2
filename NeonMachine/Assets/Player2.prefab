@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 212200400425079492}
   - component: {fileID: 50414973179598040}
   - component: {fileID: 114495928870683912}
-  - component: {fileID: 95915022940317954}
   - component: {fileID: 61669619942307342}
+  - component: {fileID: 95002948693509596}
   m_Layer: 10
   m_Name: Player2
   m_TagString: Untagged
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359998915060098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.87, y: 1.18, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 5.1, y: 2.79, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,7 +89,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.7, y: 2}
   m_EdgeRadius: 0
---- !u!95 &95915022940317954
+--- !u!95 &95002948693509596
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1359998915060098}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 48ce9dd212fed474caca4b8814e74973, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7fd5923aabe266f44ba6d8a53a8a36f3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   cooldown: 5
   spreadInDegrees: 22.5
   amount: 30
-  speed: 15
+  speed: 6
   offset: 0.5
   emittedObject: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
     type: 2}
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 80fec4fff397e11419f5df32162e9eef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.12, y: 5.12}

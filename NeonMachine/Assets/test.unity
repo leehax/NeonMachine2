@@ -152,32 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: amount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: spreadInDegrees
-      value: 22.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: emittedObject
-      value: 
-      objectReference: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
-        type: 2}
-    - target: {fileID: 50821802430620062, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71eeec92c05115042929507b9fa44981, type: 2}
   m_IsPrefabParent: 0
@@ -304,41 +278,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 212200400425079492, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: emittedObject
-      value: 
-      objectReference: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
-        type: 2}
-    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: amount
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 50414973179598040, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 50414973179598040, guid: 049e0f2715be9ae41a66274ac415aa49,
-        type: 2}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 95915022940317954, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1066533660 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1285434909095400, guid: 71eeec92c05115042929507b9fa44981,
+    type: 2}
+  m_PrefabInternal: {fileID: 213246599}
 --- !u!1 &1082315071
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +297,7 @@ GameObject:
   - component: {fileID: 1082315074}
   - component: {fileID: 1082315073}
   - component: {fileID: 1082315072}
+  - component: {fileID: 1082315076}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -420,25 +368,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082315076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082315071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0363adfd01335c46ad06e513b8dcaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 1066533660}
+  - {fileID: 1818421123}
+  minOrtho: 5
+  paddingAmount: 0.25
 --- !u!1 &1818421123 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1359998915060098, guid: 049e0f2715be9ae41a66274ac415aa49,
     type: 2}
   m_PrefabInternal: {fileID: 977372871}
---- !u!95 &1818421125
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1818421123}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7fd5923aabe266f44ba6d8a53a8a36f3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

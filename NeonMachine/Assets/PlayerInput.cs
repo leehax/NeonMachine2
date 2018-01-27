@@ -96,9 +96,11 @@ public class PlayerInput : MonoBehaviour {
 	    }
 
         //Shoot
-	    if (Input.GetButton("FireGamePad" + playerID)
-            &&shootCooldown<=0.0f)
+	    if (Input.GetButton("FireGamePad"+playerID)
+            && shootCooldown<=0.0f)
 	    {
+	        
+	        
 	        ShootProjectile();
 	    }
 
