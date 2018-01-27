@@ -48,12 +48,19 @@ public class PlayerInput : MonoBehaviour {
             rb.AddForce(direction/direction.magnitude*Time.deltaTime*scale);
             thursterCooldown -= Time.deltaTime;
 
+
 	        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-	        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-	        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
-	       // transform.Rotate(Vector2.right * );
-	        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
+	        if (playerID == 1)
+	        {
+	            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
+	                Time.deltaTime * -500);
+            }
+            else if (playerID == 0)
+	        {
+	            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
 	            Time.deltaTime*500);
+	        }
+	        
 	    }
 	     
         
