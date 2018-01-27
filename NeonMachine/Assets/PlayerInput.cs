@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour {
     private Rigidbody2D rb;
 
     [SerializeField]private int playerID;
-
+    [SerializeField] private float forceMult;
     private Vector2 direction;
 
     private float maxVelocity = 5.0f;
@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour {
 	         if (Input.GetAxis("ThrusterGamePad"+playerID)>0.0f
                 && thursterCooldown<=0.0f)
 	            {
-	            rb.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID)*10*scale);
+	            rb.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID)*forceMult*scale);
 	            thursterCooldown = 1.0f;
 	            }
 
@@ -50,16 +50,11 @@ public class PlayerInput : MonoBehaviour {
 
 
 	        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-	        if (playerID == 1)
-	        {
-	            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
-	                Time.deltaTime * -500);
-            }
-            else if (playerID == 0)
-	        {
+
+	        
 	            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
 	            Time.deltaTime*500);
-	        }
+	        
 	        
 	    }
 	     

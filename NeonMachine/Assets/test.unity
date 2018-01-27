@@ -152,16 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 61017387437206076, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5.1299996
-      objectReference: {fileID: 0}
-    - target: {fileID: 61017387437206076, guid: 71eeec92c05115042929507b9fa44981,
-        type: 2}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 5.1266665
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71eeec92c05115042929507b9fa44981, type: 2}
   m_IsPrefabParent: 0
@@ -204,7 +194,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 212200400425079492, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 95915022940317954, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1082315071
@@ -288,3 +284,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1818421123 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1359998915060098, guid: 049e0f2715be9ae41a66274ac415aa49,
+    type: 2}
+  m_PrefabInternal: {fileID: 977372871}
+--- !u!95 &1818421125
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1818421123}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7fd5923aabe266f44ba6d8a53a8a36f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
