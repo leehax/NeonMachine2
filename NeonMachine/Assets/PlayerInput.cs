@@ -8,7 +8,7 @@ public class PlayerInput : MonoBehaviour {
 	
     private Rigidbody2D rb;
 
-    private int playerID;
+    [SerializeField]private int playerID;
 
     private Vector2 direction;
 
@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour {
 	void Start ()
 	{
 	    rb = GetComponent<Rigidbody2D>();
-	    playerID = 0;
+	   // playerID = 0;
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
     
@@ -50,8 +50,10 @@ public class PlayerInput : MonoBehaviour {
 
 	        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 	        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-	      //  transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
-           
+	        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
+	       // transform.Rotate(Vector2.right * );
+	        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
+	            Time.deltaTime*500);
 	    }
 	     
         
