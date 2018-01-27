@@ -5,55 +5,80 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour {
 
-	// Use this for initialization
-    private Rigidbody2D rigidbody;
+	
+    private Rigidbody2D rb;
 
     private int playerID;
 
     private Vector2 direction;
-    private float maxVelocity = 5.0f;
-    private float thursterFuel = 1.0f;
-    private float thursterCooldown = 1.0f;
- 
 
+    private float maxVelocity = 5.0f;
+    private float thursterCooldown = 0.0f;
+    private float shootCooldown = 0.0f;
+    private float scale;
+
+    // Use this for initialization
 	void Start ()
 	{
-	    rigidbody = GetComponent<Rigidbody2D>();
+	    rb = GetComponent<Rigidbody2D>();
 	    playerID = 0;
         direction = new Vector2(0,0);
-
+	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
+    
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-
+	    
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
+	    shootCooldown -= Time.deltaTime;
 
-	    if (direction.magnitude != 0.0f)
+        //Move and Rotate the player
+        if (direction.magnitude != 0.0f)
 	    {
 	         if (Input.GetAxis("ThrusterGamePad"+playerID)>0.0f
                 && thursterCooldown<=0.0f)
 	            {
-	            rigidbody.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID)*10);
+	            rb.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID)*10*scale);
 	            thursterCooldown = 1.0f;
 	            }
 
-            rigidbody.AddForce(direction/direction.magnitude*Time.deltaTime);
+            rb.AddForce(direction/direction.magnitude*Time.deltaTime*scale);
             thursterCooldown -= Time.deltaTime;
+
+	        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+	        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+	      //  transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
+           
 	    }
 	     
         
-	   
-	    if (rigidbody.velocity.magnitude > maxVelocity)
+	    //Regulate velocity
+	    if (rb.velocity.magnitude > maxVelocity)
 	    {
 
-	        rigidbody.velocity = (rigidbody.velocity / rigidbody.velocity.magnitude) * maxVelocity;
+	        rb.velocity = (rb.velocity / rb.velocity.magnitude) * maxVelocity;
            
 	    }
 
+        //Shoot
+	    if (Input.GetButton("FireGamePad" + playerID)
+            &&shootCooldown<=0.0f)
+	    {
+	        ShootProjectile();
+	    }
+        
 
 	}
+
+    void ShootProjectile()
+    {
+        //TODO: add functionality to shoot projectile(s)
+
+        shootCooldown = 1.0f;
+    }
+ 
 
 }
