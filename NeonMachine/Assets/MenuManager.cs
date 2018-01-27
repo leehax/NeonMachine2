@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
 
     bool player1Ready;
     bool player2Ready;
@@ -43,15 +44,59 @@ public class MenuManager : MonoBehaviour {
     bool ply1CanReady;
     bool ply2CanReady;
 
-    void Start ()
+    [SerializeField]
+    Vector2 startBtnSelectedSize;
+    Vector2 startBtnInitialSize;
+    RectTransform startBtnRT;
+    [SerializeField]
+    Vector2 creditSelectedBtnSize;
+    Vector2 creditBtnInitialSize;
+    RectTransform creditsBtnRT;
+
+    [SerializeField]
+    SpriteRenderer ply1TextSR;
+    [SerializeField]
+    SpriteRenderer ply1ImageSR;
+    [SerializeField]
+    Sprite ply1TextReadySprite;
+    Sprite ply1TextNotReadySprite;
+    [SerializeField]
+    Sprite ply1ImageReadySprite;
+    Sprite ply1ImageNotReadySprite;
+
+    [SerializeField]
+    SpriteRenderer ply2TextSR;
+    [SerializeField]
+    SpriteRenderer ply2ImageSR;
+    [SerializeField]
+    Sprite ply2TextReadySprite;
+    Sprite ply2TextNotReadySprite;
+    [SerializeField]
+    Sprite ply2ImageReadySprite;
+    Sprite ply2ImageNotReadySprite;
+
+    void Start()
     {
         //TogglePlayer2ReadyStatus();
         targetPos = cam.transform.position;
+
+        startBtnRT = mainButtons[0].gameObject.GetComponent<RectTransform>();
+        creditsBtnRT = mainButtons[1].gameObject.GetComponent<RectTransform>();
+
+        startBtnInitialSize = startBtnRT.sizeDelta;
+        creditBtnInitialSize = creditsBtnRT.sizeDelta;
+
+
+        ply1TextNotReadySprite = ply1TextSR.sprite;
+        ply1ImageNotReadySprite = ply1ImageSR.sprite;
+
+        ply2TextNotReadySprite = ply2TextSR.sprite;
+        ply2ImageNotReadySprite = ply2ImageSR.sprite;
     }
-	
-	void Update ()
+
+    void Update()
     {
-        if(player1Ready && player2Ready)
+        if (player1Ready && player2Ready)
         {
             SceneManager.LoadScene(gameSceneName);
         }
@@ -60,7 +105,8 @@ public class MenuManager : MonoBehaviour {
         {
             cam.transform.position = Vector3.SmoothDamp(cam.transform.position, targetPos, ref velocity, smoothTime);
         }
-        else if (isReadyScreen)
+
+        if (isReadyScreen && Vector3.Distance(cam.transform.position, targetPos) < 0.1f)
         {
             ReadyScreenInput();
         }
@@ -72,7 +118,6 @@ public class MenuManager : MonoBehaviour {
         {
             ply1CanReady = false;
             TogglePlayer1ReadyStatus();
-            print(player1Ready);
         }
         else if (Input.GetAxis("ThrusterGamePad0") <= 0.0f && !ply1CanReady)
         {
@@ -83,7 +128,6 @@ public class MenuManager : MonoBehaviour {
         {
             ply2CanReady = false;
             TogglePlayer2ReadyStatus();
-            print(player2Ready);
         }
         else if (Input.GetAxis("ThrusterGamePad1") <= 0.0f && !ply2CanReady)
         {
@@ -95,6 +139,8 @@ public class MenuManager : MonoBehaviour {
     {
         player1Ready = !player1Ready;
 
+        ply1TextSR.sprite = player1Ready ? ply1TextReadySprite : ply1TextNotReadySprite;
+        ply1ImageSR.sprite = player1Ready ? ply1ImageReadySprite : ply1ImageNotReadySprite;
         /*readyButtons[0].GetComponentInChildren<Text>().text = player1Ready ? "Ready" : "Not Ready";
 
         ColorBlock cb = readyButtons[0].colors;
@@ -106,7 +152,30 @@ public class MenuManager : MonoBehaviour {
     {
         player2Ready = !player2Ready;
 
+        ply2TextSR.sprite = player2Ready ? ply2TextReadySprite : ply2TextNotReadySprite;
+        ply2ImageSR.sprite = player2Ready ? ply2ImageReadySprite : ply2ImageNotReadySprite;
+
         //readyButtons[1].GetComponentInChildren<Text>().text = player2Ready ? "Ready" : "Not Ready";
+    }
+
+    public void StartBtnHoverEnter()
+    {
+        startBtnRT.sizeDelta = startBtnSelectedSize;
+    }
+
+    public void StartBtnHoverExit()
+    {
+        startBtnRT.sizeDelta = startBtnInitialSize;
+    }
+
+    public void CreditBtnHoverEnter()
+    {
+        creditsBtnRT.sizeDelta = creditSelectedBtnSize;
+    }
+
+    public void CreditBtnHoverExit()
+    {
+        creditsBtnRT.sizeDelta = creditBtnInitialSize;
     }
 
     public void MovetoMainScreen()
@@ -117,8 +186,6 @@ public class MenuManager : MonoBehaviour {
         {
             b.interactable = true;
         }
-
-        EventSystem.current.SetSelectedGameObject(mainButtons[0].gameObject);
     }
 
     public void InactivateMainButtons()
@@ -144,13 +211,23 @@ public class MenuManager : MonoBehaviour {
 
     public void InactivateReadyButtons()
     {
-        player1Ready = false;
-       // player2Ready = false;
+        if (player1Ready)
+        {
+            TogglePlayer1ReadyStatus();
+        }
+
+        if (player2Ready)
+        {
+            TogglePlayer2ReadyStatus();
+        }
+
         isReadyScreen = false;
         foreach (Button b in readyButtons)
         {
             b.interactable = false;
         }
+
+        EventSystem.current.SetSelectedGameObject(mainButtons[0].gameObject);
     }
 
     public void MovetoCreditsScreen()
@@ -171,5 +248,7 @@ public class MenuManager : MonoBehaviour {
         {
             b.interactable = false;
         }
+
+        EventSystem.current.SetSelectedGameObject(mainButtons[1].gameObject);
     }
 }

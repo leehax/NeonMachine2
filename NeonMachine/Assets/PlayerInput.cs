@@ -8,14 +8,42 @@ public class PlayerInput : MonoBehaviour {
 	
     private Rigidbody2D rb;
 
-    [SerializeField]private int playerID;
-    [SerializeField] private float forceMult;
-    private Vector2 direction;
+    [SerializeField]
+    int playerID;
+    [SerializeField]
+    float forceMult;
 
-    private float maxVelocity = 5.0f;
-    private float thursterCooldown = 0.0f;
-    private float shootCooldown = 0.0f;
-    private float scale;
+    [Header("Shooting")]
+    [SerializeField]
+    int burstAmount = 4;
+    [SerializeField]
+    float burstDelay = 0.05f;
+    [SerializeField]
+    float cooldown = 5.0f;
+    [SerializeField]
+    float spreadInDegrees = 22.5f;
+    [SerializeField]
+    int amount = 100;
+    [SerializeField]
+    float speed = 10.0f;
+    [SerializeField]
+    float offset = 0.2f;
+    [SerializeField]
+    GameObject emittedObject;
+    [SerializeField]
+    GameObject ripple;
+    [SerializeField]
+    Color color = Color.white;
+
+    Vector2 direction;
+
+    float maxVelocity = 5.0f;
+    float thursterCooldown = 0.0f;
+    float shootCooldown = 0.0f;
+    float scale;
+
+    int burst = 0;
+    float accumulator = 0.0f;
 
     // Use this for initialization
 	void Start ()
@@ -73,7 +101,19 @@ public class PlayerInput : MonoBehaviour {
 	    {
 	        ShootProjectile();
 	    }
-        
+
+        if (burst > 0)
+        {
+            if (accumulator >= burstDelay)
+            {
+                accumulator = 0;
+                Burst();
+                burst--;
+            }
+
+            accumulator += Time.deltaTime;
+
+        }
 
 	}
 
@@ -81,8 +121,29 @@ public class PlayerInput : MonoBehaviour {
     {
         //TODO: add functionality to shoot projectile(s)
 
-        shootCooldown = 1.0f;
+        shootCooldown = cooldown;
+        burst = burstAmount;
+        accumulator = burstDelay;
     }
- 
+    
+    void Burst()
+    {
+        float rotation = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        float spread = Mathf.Deg2Rad * spreadInDegrees;
 
+        rotation -= spread / 2.0f;
+
+        Vector2 headingVector = new Vector2(Mathf.Cos(rotation), Mathf.Sin(rotation));
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject instance = Instantiate(emittedObject);
+            instance.gameObject.GetComponent<SpriteRenderer>().color = color;
+            
+            instance.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, 0);
+            instance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (rotation + (spread / amount) * i)) * Mathf.Rad2Deg);
+            instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(rotation + (spread / amount) * i), Mathf.Sin(rotation + (spread / amount) * i)) * speed;
+        }
+        GameObject instance2 = Instantiate(ripple);
+        instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -burst * 0.1f);
+    }
 }
