@@ -77,10 +77,13 @@ public class PlayerInput : MonoBehaviour {
     AudioClip primaryFireClip;
     [SerializeField]
     AudioClip deathClip;
+    [SerializeField]
+    AudioClip thrustClip;
 
     AudioSource collisionSrc;
     AudioSource primaryFireSrc;
     AudioSource deathSrc;
+    AudioSource thrustSrc;
 
     // Use this for initialization
     void Start ()
@@ -104,11 +107,21 @@ public class PlayerInput : MonoBehaviour {
         deathSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
         deathSrc.playOnAwake = false;
         deathSrc.clip = deathClip;
+
+        thrustSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
+        thrustSrc.playOnAwake = false;
+        thrustSrc.clip = thrustClip;
+        thrustSrc.loop = true;
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
+        if(health <= 0 && !deathSrc.isPlaying)
+        {
+            deathSrc.Play();
+        }
+
         anim.SetBool("IsDead",health<=0.0f);
 
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
@@ -118,10 +131,13 @@ public class PlayerInput : MonoBehaviour {
 
 	    if (!isBoosting)
 	    {
-	        thrusterFuel += Time.deltaTime * 45;
+            if(thrustSrc.isPlaying)
+            {
+                thrustSrc.Stop();
+            }
+            thrusterFuel += Time.deltaTime * 45;
             thrusterFuel = Mathf.Clamp(thrusterFuel, 0, maxThrusterFuel);
 	        particleSys.Stop();
-
 	    }
         
         //Move and Rotate the player
@@ -135,6 +151,11 @@ public class PlayerInput : MonoBehaviour {
         isBoosting = false;
         if (Input.GetAxis("ThrusterGamePad" + playerID) > 0.0f && thrusterFuel >= 0.0f)
         {
+            if (!thrustSrc.isPlaying)
+            {
+                thrustSrc.Play();
+            }
+
             rb.AddForce(new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)) * Input.GetAxis("ThrusterGamePad" + playerID) * forceMult * scale);
             thrusterFuel -= Time.deltaTime * 10;
             if (particleSys.isPlaying == false)
@@ -173,6 +194,8 @@ public class PlayerInput : MonoBehaviour {
         rotation = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
         headingVector = new Vector2(Mathf.Cos(rotation), Mathf.Sin(rotation));
         position = transform.position;
+
+        primaryFireSrc.Play();
     }
     
     void Burst()
@@ -234,6 +257,8 @@ public class PlayerInput : MonoBehaviour {
             rippleInst.endRadius = 3.5f;
             rippleInst.startDistortion = 9.0f;
             rippleInst.endDistortion = 0.0f;
+
+            collisionSrc.Play();
         }
         else if (other.gameObject.layer == 8)
         {
