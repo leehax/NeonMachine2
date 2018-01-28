@@ -75,6 +75,18 @@ public class MenuManager : MonoBehaviour
     Sprite ply2ImageReadySprite;
     Sprite ply2ImageNotReadySprite;
 
+    [SerializeField]
+    float readyDelay;
+    float readyTime;
+    bool counting;
+
+    [SerializeField]
+    GameObject ripple;
+    [SerializeField]
+    float rippleLifeTime;
+    [SerializeField]
+    float rippleDistortion;
+
     void Start()
     {
         //TogglePlayer2ReadyStatus();
@@ -92,13 +104,38 @@ public class MenuManager : MonoBehaviour
 
         ply2TextNotReadySprite = ply2TextSR.sprite;
         ply2ImageNotReadySprite = ply2ImageSR.sprite;
+
+        TogglePlayer2ReadyStatus();
     }
 
     void Update()
     {
         if (player1Ready && player2Ready)
         {
-            SceneManager.LoadScene(gameSceneName);
+            if(!counting)
+            {
+                GameObject go = Instantiate(ripple);
+                go.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -2);
+                Ripple r = go.GetComponent<Ripple>();
+                r.ttl = rippleLifeTime;
+                r.startDistortion = rippleDistortion;
+                r.endRadius = 2.5f;
+                
+                counting = true;
+
+                readyTime = Time.time + readyDelay;
+            }
+            else
+            {
+                if(Time.time > readyTime)
+                {
+                    SceneManager.LoadScene(gameSceneName);
+                }
+            }
+        }
+        else if(counting)
+        {
+            counting = false;
         }
 
         if (cam.transform.position != targetPos)
