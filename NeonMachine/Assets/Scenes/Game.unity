@@ -2405,6 +2405,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: planetCollisionForce
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_IsPrefabParent: 0
@@ -3216,6 +3221,11 @@ Prefab:
     - target: {fileID: 4243301155256912, guid: 71eeec92c05115042929507b9fa44981, type: 2}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
+        type: 2}
+      propertyPath: planetCollisionForce
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71eeec92c05115042929507b9fa44981, type: 2}

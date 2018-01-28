@@ -62,7 +62,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  planetCollisionForce: 20
+  maxHealth: 0
+  planetCollisionForce: 60
   burstAmount: 4
   burstDelay: 0.15
   cooldown: 5
