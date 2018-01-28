@@ -22,6 +22,8 @@ public class CameraControlller : MonoBehaviour {
     private Rect playerPosRect;
     private float aspectRatio;
 
+    private Rect cameraBounds;
+
 	void Start ()
 	{
 	    aspectRatio = (float)Screen.width / Screen.height;
@@ -36,14 +38,48 @@ public class CameraControlller : MonoBehaviour {
 	{
      
 
-	    targetPosition = (players[0].transform.position + players[1].transform.position) / 2;
-	    targetPosition.z = -10;
-	    transform.position = Vector3.Lerp(transform.position,targetPosition, Time.deltaTime*Vector3.Distance(transform.position,targetPosition));
-	  
-	   
+	    
+        cameraBounds.yMax = targetPosition.y + camera.orthographicSize;
+	    cameraBounds.yMin = targetPosition.y - camera.orthographicSize;
+	    cameraBounds.xMax = targetPosition.x + (camera.orthographicSize * aspectRatio) ;
+	    cameraBounds.xMin = targetPosition.x - (camera.orthographicSize * aspectRatio) ;
+
+        print("Target"+targetPosition.x);
+	    print("xMin"+cameraBounds.xMin);
+        
 	    
 
-        camera.orthographicSize = Mathf.Lerp(camera.orthographicSize,GetNewOrthoSize(),Time.deltaTime*Mathf.Abs(GetNewOrthoSize()-camera.orthographicSize));
+	    //if (cameraBounds.xMin < -55)
+	    //{
+	    //    targetPosition.x = cameraBounds.xMin + 55;
+	    //}
+     //   else if (cameraBounds.xMax > 55)
+	    //{
+	    //    targetPosition.x = cameraBounds.xMax - 55;
+     //   }
+	    //if (cameraBounds.yMin < -45)
+	    //{
+	    //    targetPosition.y = cameraBounds.yMin + 45;
+     //   }
+     //   else if (cameraBounds.yMax > 45)
+	    //{
+	    //    targetPosition.y = cameraBounds.yMax - 45;
+     //   }
+     //   else if (cameraBounds.xMin >= -55
+     //            && cameraBounds.xMax <= 55
+     //            && cameraBounds.yMin >= -45
+     //            && cameraBounds.yMax <= 45)
+	    //{
+	    //    targetPosition = (players[0].transform.position + players[1].transform.position) / 2;
+     //   }
+
+	    targetPosition = (players[0].transform.position + players[1].transform.position) / 2;
+        targetPosition.z = -10;
+	    transform.position = Vector3.Lerp(transform.position,targetPosition, Time.deltaTime*Vector3.Distance(transform.position,targetPosition));
+
+	    camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, GetNewOrthoSize(), Time.deltaTime * Mathf.Abs(GetNewOrthoSize() - camera.orthographicSize));
+
+
 	}
 
     float GetNewOrthoSize()
