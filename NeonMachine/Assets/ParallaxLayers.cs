@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ParallaxLayers : MonoBehaviour
 {
+    [Header("Background")]
+    [SerializeField]
+    GameObject background;
     [Header("Parallax Layer 1")]
     [SerializeField]
     GameObject layer1;
@@ -37,5 +40,6 @@ public class ParallaxLayers : MonoBehaviour
         layer1.transform.localScale = new Vector3(scale, scale, 1);
         layer2.transform.localScale = new Vector3(scale, scale, 1);
         layer3.transform.localScale = new Vector3(scale, scale, 1);
+        background.transform.localScale = new Vector3(scale, scale, 1);
     }
 }
