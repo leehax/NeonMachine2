@@ -207,7 +207,7 @@ public class PlayerInput : MonoBehaviour {
         Ripple rippleInst = instance2.GetComponent<Ripple>();
         rippleInst.ttl = 0.5f;
         rippleInst.startRadius = 0.1f;
-        rippleInst.endRadius = 1.0f;
+        rippleInst.endRadius = 3.0f;
         rippleInst.startDistortion = 5.0f;
         rippleInst.endDistortion = 0.0f;
     }
@@ -231,7 +231,7 @@ public class PlayerInput : MonoBehaviour {
             Ripple rippleInst = instance.GetComponent<Ripple>();
             rippleInst.ttl = 0.2f;
             rippleInst.startRadius = 0.1f;
-            rippleInst.endRadius = 1.5f;
+            rippleInst.endRadius = 3.5f;
             rippleInst.startDistortion = 9.0f;
             rippleInst.endDistortion = 0.0f;
         }
@@ -251,7 +251,7 @@ public class PlayerInput : MonoBehaviour {
                     Ripple rippleInst = instance.GetComponent<Ripple>();
                     rippleInst.ttl = 0.1f + Random.value * 0.2f;
                     rippleInst.startRadius = 0.02f;
-                    rippleInst.endRadius = 0.2f + Random.value * 0.1f;
+                    rippleInst.endRadius = 0.9f + Random.value * 0.5f;
                     rippleInst.startDistortion = 3.0f + Random.value * 2.0f;
                     rippleInst.endDistortion = 0.0f;
                 }

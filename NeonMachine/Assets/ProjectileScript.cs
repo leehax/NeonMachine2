@@ -45,7 +45,7 @@ public class ProjectileScript : MonoBehaviour {
                 Ripple rippleInst = instance.GetComponent<Ripple>();
                 rippleInst.ttl = Random.value * 0.3f + 0.5f;
                 rippleInst.startRadius = 0.05f;
-                rippleInst.endRadius = Random.value * 0.05f + 0.05f;
+                rippleInst.endRadius = Random.value * 0.2f + 0.2f;
                 rippleInst.startDistortion = 10.0f;
                 rippleInst.endDistortion = 0.0f;
             }
