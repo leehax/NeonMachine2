@@ -76,7 +76,7 @@ public class PlayerInput : MonoBehaviour {
 	    particleSys=GetComponent<ParticleSystem>();
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
-    
+        print(health);
 	}
 	
 	// Update is called once per frame

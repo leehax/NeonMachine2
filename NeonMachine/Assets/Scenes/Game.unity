@@ -334,6 +334,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17f5ab7bc13c68d4ea26d0a91c2454ac, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &81807534 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1137705091363920, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
 --- !u!4 &126251137 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4723824738275812, guid: a1b93400c8e8c8844a404b340c13a0ee,
@@ -892,6 +897,16 @@ Prefab:
     - target: {fileID: 224567578075839730, guid: 5ee1496e9f174fc4697267e9bad17e1f,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114457326868228210, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114296377545576120, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+        type: 2}
+      propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2410,6 +2425,11 @@ Prefab:
       propertyPath: planetCollisionForce
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_IsPrefabParent: 0
@@ -2538,6 +2558,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &944827656 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114129563880018372, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &955403724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3172,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1022059436}
+  - component: {fileID: 1022059437}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3166,11 +3193,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022059437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022059435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb043d6f4c880140a767abfa0bd9a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendTime: 0.1
+  player1: {fileID: 1562151559}
+  player1HealthBar: {fileID: 1263443607}
+  player1Thruster: {fileID: 1143814480}
+  player1Shoot: {fileID: 1111023654}
+  player2: {fileID: 1821476222}
+  player2HealthBar: {fileID: 81807534}
+  player2Thruster: {fileID: 1468245530}
+  player2Shoot: {fileID: 944827656}
 --- !u!4 &1055913143 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4443599089151684, guid: 22b6861914dc57d42a77997668281f11,
     type: 2}
   m_PrefabInternal: {fileID: 1430942615}
+--- !u!114 &1111023654 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114552219719172262, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &1143814480 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1520403190342156, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
 --- !u!1001 &1147577176
 Prefab:
   m_ObjectHideFlags: 0
@@ -3226,6 +3284,11 @@ Prefab:
         type: 2}
       propertyPath: planetCollisionForce
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
+        type: 2}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71eeec92c05115042929507b9fa44981, type: 2}
@@ -3343,6 +3406,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4494425507809408, guid: 35b106df91b421344a26c55a890f9918,
     type: 2}
   m_PrefabInternal: {fileID: 2057170585}
+--- !u!1 &1263443607 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1519376755059064, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
 --- !u!1 &1277518794
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,6 +4133,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 22b6861914dc57d42a77997668281f11, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1468245530 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1330336341505894, guid: 5ee1496e9f174fc4697267e9bad17e1f,
+    type: 2}
+  m_PrefabInternal: {fileID: 319243600}
 --- !u!1 &1542021785
 GameObject:
   m_ObjectHideFlags: 0
