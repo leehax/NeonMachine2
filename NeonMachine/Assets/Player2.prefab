@@ -124,8 +124,8 @@ MonoBehaviour:
   cooldown: 5
   spreadInDegrees: 22.5
   amount: 30
-  speed: 6
-  offset: 0.5
+  speed: 15
+  offset: 0.8
   emittedObject: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
     type: 2}
   ripple: {fileID: 1571557450000666, guid: 8d1a7eac94bcd974ca3b08572a6d90bf, type: 2}

@@ -146,6 +146,6 @@ public class PlayerInput : MonoBehaviour {
             instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(rotation + (spread / amount) * i), Mathf.Sin(rotation + (spread / amount) * i)) * speed;
         }
         GameObject instance2 = Instantiate(ripple);
-        instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -burst * 0.1f);
+        instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -GlobalVars.RippleOffset);
     }
 }

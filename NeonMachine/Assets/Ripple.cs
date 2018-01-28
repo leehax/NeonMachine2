@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class Ripple : MonoBehaviour {
 
-    [SerializeField]
-    float ttl = 0.1f;
-    [SerializeField]
-    float startRadius = 0.1f;
-    [SerializeField]
-    float endRadius = 1.0f;
-    [SerializeField]
-    float startDistortion = 2.0f;
-    [SerializeField]
-    float endDistortion;
+    public float ttl = 0.1f;
+    public float startRadius = 0.1f;
+    public float endRadius = 1.0f;
+    public float startDistortion = 2.0f;
+    public float endDistortion;
 
     float timeLived = 0.0f;
     float lerpMult;

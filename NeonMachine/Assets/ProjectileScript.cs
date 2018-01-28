@@ -31,7 +31,13 @@ public class ProjectileScript : MonoBehaviour {
         {
             Destroy(gameObject, .01f);
             GameObject instance = Instantiate(ripple);
-            instance.transform.position = transform.position;
+            instance.transform.position = new Vector3(transform.position.x, transform.position.y, instance.transform.position.z - GlobalVars.RippleOffset);
+            Ripple rippleInst = instance.GetComponent<Ripple>();
+            rippleInst.ttl = 0.3f;
+            rippleInst.startRadius = 0.05f;
+            rippleInst.endRadius = 0.1f;
+            rippleInst.startDistortion = 10.0f;
+            rippleInst.endDistortion = 0.0f;
             //Vector2 normal = other.transform.position - transform.position;
             //normal.Normalize();
             //Rigidbody2D rBody = GetComponent<Rigidbody2D>();
