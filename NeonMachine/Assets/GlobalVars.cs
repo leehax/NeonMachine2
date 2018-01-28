@@ -7,6 +7,8 @@ public class GlobalVars : MonoBehaviour {
     public static float RippleOffset { get{ float temp = rippleOffset; rippleOffset += 0.0001f; return temp; } }
     private static float rippleOffset = 0.0f;
 
+    public static List<GameObject> inactiveProjectiles = new List<GameObject>();
+
 	// Use this for initialization
 	void Start () {
 		

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour {
 
-    [SerializeField]
-    float ttl = 5;
+    public float ttl = 5;
     [SerializeField]
     float fadeTime = 0.5f;
     public int ownerID;
@@ -15,25 +14,30 @@ public class ProjectileScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Destroy(gameObject, ttl);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         ttl -= Time.deltaTime;
-        if (ttl <= fadeTime)
+        if (ttl <= 0.0f)
         {
-            Color color = GetComponent<SpriteRenderer>().color;
-            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, Mathf.Lerp(0, 1, ttl * 1.0f / fadeTime));
+            GlobalVars.inactiveProjectiles.Add(gameObject);
+            gameObject.SetActive(false);
+            return;
         }
+        Color color = GetComponent<SpriteRenderer>().color;
+        if (ttl <= fadeTime)
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, Mathf.Lerp(0, 1, ttl * 1.0f / fadeTime));
+        else
+            GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 9)
         {
-            Destroy(gameObject, .01f);
             if (Random.value < 0.25f)
             {
                 GameObject instance = Instantiate(ripple);
@@ -45,6 +49,10 @@ public class ProjectileScript : MonoBehaviour {
                 rippleInst.startDistortion = 10.0f;
                 rippleInst.endDistortion = 0.0f;
             }
+
+            GlobalVars.inactiveProjectiles.Add(gameObject);
+            gameObject.SetActive(false);
+            return;
             //Vector2 normal = other.transform.position - transform.position;
             //normal.Normalize();
             //Rigidbody2D rBody = GetComponent<Rigidbody2D>();
