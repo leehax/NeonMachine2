@@ -43,8 +43,8 @@ public class CameraControlller : MonoBehaviour {
 	    cameraBounds.xMax = targetPosition.x + (camera.orthographicSize * aspectRatio) ;
 	    cameraBounds.xMin = targetPosition.x - (camera.orthographicSize * aspectRatio) ;
 
-        print("Target"+targetPosition.x);
-	    print("xMin"+cameraBounds.xMin);
+        //print("Target"+targetPosition.x);
+	    //print("xMin"+cameraBounds.xMin);
         
 	    
 

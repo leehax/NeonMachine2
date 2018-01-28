@@ -20,10 +20,10 @@ public class MeteorSpawn : MonoBehaviour {
 
     float nextSpawn;
 
-	void Start ()
-    {
-		
-	}
+    [SerializeField]
+    GameObject Petunia;
+    [SerializeField]
+    int petuniaChance;
 	
 	void Update ()
     {
@@ -34,8 +34,20 @@ public class MeteorSpawn : MonoBehaviour {
 
             float speed = Random.Range(minSpeed, maxSpeed);
 
-            GameObject go = Instantiate(meteorPrefab, spawnPoints[spawnPoint].position, spawnPoints[spawnPoint].rotation);
-            go.GetComponent<Rigidbody2D>().AddForce(transform.forward * speed);
+            int petuniaRand = Random.Range(0, petuniaChance);
+
+            GameObject go;
+
+            if (petuniaRand == 1)
+            {
+                go = Instantiate(Petunia, spawnPoints[spawnPoint].position, spawnPoints[spawnPoint].rotation);
+                go.GetComponent<Rigidbody2D>().AddForce(-go.transform.right * 800);
+            }
+            else
+            {
+                go = Instantiate(meteorPrefab, spawnPoints[spawnPoint].position, spawnPoints[spawnPoint].rotation);
+                go.GetComponent<Rigidbody2D>().AddForce(-go.transform.right * speed);
+            }
         }	
 	}
 }

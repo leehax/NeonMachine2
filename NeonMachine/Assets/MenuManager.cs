@@ -96,7 +96,6 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        //TogglePlayer2ReadyStatus();
         targetPos = cam.transform.position;
 
         startBtnRT = mainButtons[0].gameObject.GetComponent<RectTransform>();
@@ -113,8 +112,6 @@ public class MenuManager : MonoBehaviour
 
         ply2TextNotReadySprite = ply2TextSR.sprite;
         ply2ImageNotReadySprite = ply2ImageSR.sprite;
-
-        TogglePlayer2ReadyStatus();
     }
 
     void Update()
