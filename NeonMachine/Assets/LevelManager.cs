@@ -21,6 +21,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject player2Thruster;
     [SerializeField] private Image player2Shoot;
 
+    [Header("Countdown")] [SerializeField] private Image countDownImage;
+
      PlayerInput player1Variables;
      PlayerInput player2Variables;
 
@@ -37,6 +39,20 @@ public class LevelManager : MonoBehaviour
     {
         player1Variables = player1.GetComponent<PlayerInput>();
         player2Variables = player2.GetComponent<PlayerInput>();
+
+        player1.GetComponent<Rigidbody2D>().simulated = false;
+        player2.GetComponent<Rigidbody2D>().simulated = false;
+        StartCoroutine(countDown());
+
+    }
+
+    IEnumerator countDown()
+    {
+      
+        yield return new WaitForSeconds(3.5f);
+        player1.GetComponent<Rigidbody2D>().simulated = true;
+        player2.GetComponent<Rigidbody2D>().simulated = true;
+        countDownImage.enabled = false;
 
     }
 	
