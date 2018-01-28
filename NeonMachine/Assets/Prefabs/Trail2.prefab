@@ -96,7 +96,7 @@ TrailRenderer:
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: 0
+        value: 1
         inSlope: -3.4904246
         outSlope: -3.4904246
         tangentMode: 0
@@ -106,7 +106,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.9264706, g: 0.5558824, b: 0, a: 1}
-      key1: {r: 0.8014706, g: 0.447718, b: 0, a: 0}
+      key1: {r: 0.8014706, g: 0.447718, b: 0, a: 1}
       key2: {r: 0.28676468, g: 0.16019267, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -41,6 +41,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     List<Button> creditsButtons;
 
+    [SerializeField]
+    Transform controlsCanvas;
+
+    [SerializeField]
+    List<Button> controlsButtons;
+
     bool ply1CanReady;
     bool ply2CanReady;
 
@@ -52,6 +58,7 @@ public class MenuManager : MonoBehaviour
     Vector2 creditSelectedBtnSize;
     Vector2 creditBtnInitialSize;
     RectTransform creditsBtnRT;
+    RectTransform controlsBtnRT;
 
     [SerializeField]
     SpriteRenderer ply1TextSR;
@@ -94,6 +101,8 @@ public class MenuManager : MonoBehaviour
 
         startBtnRT = mainButtons[0].gameObject.GetComponent<RectTransform>();
         creditsBtnRT = mainButtons[1].gameObject.GetComponent<RectTransform>();
+        controlsBtnRT = mainButtons[2].gameObject.GetComponent<RectTransform>();
+        
 
         startBtnInitialSize = startBtnRT.sizeDelta;
         creditBtnInitialSize = creditsBtnRT.sizeDelta;
@@ -215,6 +224,16 @@ public class MenuManager : MonoBehaviour
         creditsBtnRT.sizeDelta = creditBtnInitialSize;
     }
 
+    public void ControlsBtnHoverEnter()
+    {
+        controlsBtnRT.sizeDelta = startBtnSelectedSize;
+    }
+
+    public void ControlsBtnHoverExit()
+    {
+        controlsBtnRT.sizeDelta = startBtnInitialSize;
+    }
+
     public void MovetoMainScreen()
     {
         targetPos = new Vector3(mainCanvas.position.x, mainCanvas.position.y, cam.transform.position.z);
@@ -287,5 +306,27 @@ public class MenuManager : MonoBehaviour
         }
 
         EventSystem.current.SetSelectedGameObject(mainButtons[1].gameObject);
+    }
+
+    public void MovetoControlsScreen()
+    {
+        targetPos = new Vector3(controlsCanvas.position.x, controlsCanvas.position.y, cam.transform.position.z);
+
+        foreach (Button b in creditsButtons)
+        {
+            b.interactable = true;
+        }
+
+        EventSystem.current.SetSelectedGameObject(controlsButtons[0].gameObject);
+    }
+
+    public void InactivateControlsButtons()
+    {
+        foreach (Button b in controlsButtons)
+        {
+            b.interactable = false;
+        }
+
+        EventSystem.current.SetSelectedGameObject(mainButtons[2].gameObject);
     }
 }
