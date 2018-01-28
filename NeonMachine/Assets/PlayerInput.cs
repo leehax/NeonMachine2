@@ -7,11 +7,10 @@ public class PlayerInput : MonoBehaviour {
 
 	
     private Rigidbody2D rb;
-
+    private ParticleSystem particleSys;
     [SerializeField]
     int playerID;
-    [SerializeField]
-    float forceMult;
+    
 
     [Header("Shooting")]
     [SerializeField]
@@ -35,21 +34,30 @@ public class PlayerInput : MonoBehaviour {
     [SerializeField]
     Color color = Color.white;
 
+    [Header("Thruster")]
+    [SerializeField]
+    float maxThrusterFuel = 3.0f;
+    [SerializeField]
+    float thrusterCoolDown;
+    [SerializeField]
+    float forceMult;
+
     Vector2 direction;
 
     float maxVelocity = 5.0f;
-    float thursterCooldown = 0.0f;
+    float thrusterFuel = 1.0f;
     float shootCooldown = 0.0f;
     float scale;
-
+    float currentThrusterCoolDown=0.0f;
     int burst = 0;
     float accumulator = 0.0f;
+    private bool isBoosting = false;
 
     // Use this for initialization
 	void Start ()
 	{
 	    rb = GetComponent<Rigidbody2D>();
-	   // playerID = 0;
+	    particleSys=GetComponent<ParticleSystem>();
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
     
@@ -62,38 +70,47 @@ public class PlayerInput : MonoBehaviour {
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
 	    shootCooldown -= Time.deltaTime;
+	    currentThrusterCoolDown -= Time.deltaTime;
 
+	    if (!isBoosting)
+	    {
+	        thrusterFuel += Time.deltaTime*10;
+	        particleSys.Stop();
+
+	    }
+        
         //Move and Rotate the player
         if (direction.magnitude != 0.0f)
 	    {
-	         if (Input.GetAxis("ThrusterGamePad"+playerID)>0.0f
-                && thursterCooldown<=0.0f)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
+                    Time.deltaTime*500);
+	        
+	   
+	        
+	    }
+        if (Input.GetAxis("ThrusterGamePad" + playerID) > 0.0f
+	            && thrusterFuel >= 0.0f
+                && thrusterCoolDown<=0.0f)
+	        {
+
+	            rb.AddForce(transform.forward * Input.GetAxis("ThrusterGamePad" + playerID) * forceMult *
+	                        scale);
+	            currentThrusterCoolDown = thrusterCoolDown;
+	            thrusterFuel -= Time.deltaTime * 10;
+	            isBoosting = true;
+	            if (particleSys.isPlaying == false)
 	            {
-	            rb.AddForce((direction/direction.magnitude)*Input.GetAxis("ThrusterGamePad"+playerID)*forceMult*scale);
-	            thursterCooldown = 1.0f;
+	                particleSys.Play();
 	            }
 
-            rb.AddForce(direction/direction.magnitude*Time.deltaTime*scale);
-            thursterCooldown -= Time.deltaTime;
-
-
-	        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-	        
-	            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
-	            Time.deltaTime*500);
-	        
-	        
-	    }
-	     
+	     }
         
-	    //Regulate velocity
-	    if (rb.velocity.magnitude > maxVelocity)
-	    {
 
-	        rb.velocity = (rb.velocity / rb.velocity.magnitude) * maxVelocity;
-           
-	    }
+        print(currentThrusterCoolDown);
+	        
+	    
+     
 
         //Shoot
 	    if (Input.GetButton("FireGamePad"+playerID)
@@ -147,5 +164,10 @@ public class PlayerInput : MonoBehaviour {
         }
         GameObject instance2 = Instantiate(ripple);
         instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -GlobalVars.RippleOffset);
+    }
+
+    public float GetID()
+    {
+        return playerID;
     }
 }
