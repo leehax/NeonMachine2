@@ -10,7 +10,9 @@ public class PlayerInput : MonoBehaviour {
     private ParticleSystem particleSys;
     [SerializeField]
     int playerID;
-    
+
+    [SerializeField]
+    float planetCollisionForce = 30.0f;
 
     [Header("Shooting")]
     [SerializeField]
@@ -51,10 +53,13 @@ public class PlayerInput : MonoBehaviour {
     float currentThrusterCoolDown=0.0f;
     int burst = 0;
     float accumulator = 0.0f;
-    private bool isBoosting = false;
+    bool isBoosting = false;
+    Vector2 headingVector;
+    float rotation;
+    Vector3 position;
 
     // Use this for initialization
-	void Start ()
+    void Start ()
 	{
 	    rb = GetComponent<Rigidbody2D>();
 	    particleSys=GetComponent<ParticleSystem>();
@@ -66,7 +71,6 @@ public class PlayerInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-	    
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
 	    shootCooldown -= Time.deltaTime;
@@ -74,7 +78,7 @@ public class PlayerInput : MonoBehaviour {
 
 	    if (!isBoosting)
 	    {
-	        thrusterFuel += Time.deltaTime*10;
+	        thrusterFuel += Time.deltaTime * 10;
 	        particleSys.Stop();
 
 	    }
@@ -84,40 +88,25 @@ public class PlayerInput : MonoBehaviour {
 	    {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle)),
-                    Time.deltaTime*500);
-	        
-	   
-	        
+                    Time.deltaTime*500);  
 	    }
-        if (Input.GetAxis("ThrusterGamePad" + playerID) > 0.0f
-	            && thrusterFuel >= 0.0f
-                && thrusterCoolDown<=0.0f)
-	        {
 
-	            rb.AddForce(transform.forward * Input.GetAxis("ThrusterGamePad" + playerID) * forceMult *
-	                        scale);
-	            currentThrusterCoolDown = thrusterCoolDown;
-	            thrusterFuel -= Time.deltaTime * 10;
-	            isBoosting = true;
-	            if (particleSys.isPlaying == false)
-	            {
-	                particleSys.Play();
-	            }
-
-	     }
-        
-
-        print(currentThrusterCoolDown);
-	        
-	    
-     
+        isBoosting = false;
+        if (Input.GetAxis("ThrusterGamePad" + playerID) > 0.0f && thrusterFuel >= 0.0f)
+        {
+            rb.AddForce(new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)) * Input.GetAxis("ThrusterGamePad" + playerID) * forceMult * scale);
+            thrusterFuel -= Time.deltaTime * 10;
+            if (particleSys.isPlaying == false)
+            {
+                particleSys.Play();
+            }
+            isBoosting = true;
+        }
 
         //Shoot
 	    if (Input.GetButton("FireGamePad"+playerID)
             && shootCooldown<=0.0f)
 	    {
-	        
-	        
 	        ShootProjectile();
 	    }
 
@@ -129,11 +118,8 @@ public class PlayerInput : MonoBehaviour {
                 Burst();
                 burst--;
             }
-
             accumulator += Time.deltaTime;
-
         }
-
 	}
 
     void ShootProjectile()
@@ -143,31 +129,59 @@ public class PlayerInput : MonoBehaviour {
         shootCooldown = cooldown;
         burst = burstAmount;
         accumulator = burstDelay;
+        rotation = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        headingVector = new Vector2(Mathf.Cos(rotation), Mathf.Sin(rotation));
+        position = transform.position;
     }
     
     void Burst()
     {
-        float rotation = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        float tempRotation = rotation;
         float spread = Mathf.Deg2Rad * spreadInDegrees;
 
-        rotation -= spread / 2.0f;
+        tempRotation -= spread / 2.0f;
 
-        Vector2 headingVector = new Vector2(Mathf.Cos(rotation), Mathf.Sin(rotation));
         for (int i = 0; i < amount; i++)
         {
             GameObject instance = Instantiate(emittedObject);
             instance.gameObject.GetComponent<SpriteRenderer>().color = color;
             
-            instance.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, 0);
-            instance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (rotation + (spread / amount) * i)) * Mathf.Rad2Deg);
-            instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(rotation + (spread / amount) * i), Mathf.Sin(rotation + (spread / amount) * i)) * speed;
+            instance.transform.position = position + new Vector3(headingVector.x * offset, headingVector.y * offset, 0);
+            instance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (tempRotation + (spread / amount) * i)) * Mathf.Rad2Deg);
+            instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(tempRotation + (spread / amount) * i), Mathf.Sin(tempRotation + (spread / amount) * i)) * speed;
         }
         GameObject instance2 = Instantiate(ripple);
         instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -GlobalVars.RippleOffset);
+        Ripple rippleInst = instance2.GetComponent<Ripple>();
+        rippleInst.ttl = 0.5f;
+        rippleInst.startRadius = 0.1f;
+        rippleInst.endRadius = 1.0f;
+        rippleInst.startDistortion = 5.0f;
+        rippleInst.endDistortion = 0.0f;
     }
 
     public float GetID()
     {
         return playerID;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 9)
+        {
+            Vector2 normal = other.transform.position - transform.position;
+            normal.Normalize();
+            Rigidbody2D rBody = GetComponent<Rigidbody2D>();
+            rBody.velocity = (rBody.velocity.normalized - 2 * Vector2.Dot(rBody.velocity.normalized, normal) * normal) * planetCollisionForce;
+
+            GameObject instance = Instantiate(ripple);
+            instance.transform.position = transform.position + new Vector3(0, 0, -GlobalVars.RippleOffset);
+            Ripple rippleInst = instance.GetComponent<Ripple>();
+            rippleInst.ttl = 0.2f;
+            rippleInst.startRadius = 0.1f;
+            rippleInst.endRadius = 1.5f;
+            rippleInst.startDistortion = 9.0f;
+            rippleInst.endDistortion = 0.0f;
+        }
     }
 }
