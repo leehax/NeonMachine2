@@ -343,7 +343,6 @@ GameObject:
   - component: {fileID: 46503116}
   - component: {fileID: 46503119}
   - component: {fileID: 46503118}
-  - component: {fileID: 46503117}
   m_Layer: 5
   m_Name: Controls canvas
   m_TagString: Untagged
@@ -370,22 +369,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 780, y: 439}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &46503117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 46503115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &46503118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7000,7 +6983,6 @@ GameObject:
   - component: {fileID: 1326908129}
   - component: {fileID: 1326908128}
   - component: {fileID: 1326908127}
-  - component: {fileID: 1326908126}
   m_Layer: 5
   m_Name: Ready Canvas
   m_TagString: Untagged
@@ -7008,22 +6990,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1326908126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1326908125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1326908127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9000,7 +8966,6 @@ GameObject:
   - component: {fileID: 1806273720}
   - component: {fileID: 1806273719}
   - component: {fileID: 1806273718}
-  - component: {fileID: 1806273717}
   m_Layer: 5
   m_Name: Credits Canvas
   m_TagString: Untagged
@@ -9008,22 +8973,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1806273717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1806273716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1806273718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11390,7 +11339,6 @@ GameObject:
   - component: {fileID: 2121605528}
   - component: {fileID: 2121605527}
   - component: {fileID: 2121605526}
-  - component: {fileID: 2121605525}
   m_Layer: 5
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -11398,22 +11346,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2121605525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2121605524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &2121605526
 MonoBehaviour:
   m_ObjectHideFlags: 0

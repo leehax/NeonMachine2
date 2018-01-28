@@ -61,6 +61,11 @@ public class LevelManager : MonoBehaviour
 	{
         if (Input.GetKey(KeyCode.Escape))
         {
+            for (int i = 0; i < GlobalVars.inactiveProjectiles.Count; i++)
+            {
+                Destroy(GlobalVars.inactiveProjectiles[i]);
+            }
+            GlobalVars.inactiveProjectiles.Clear();
             SceneManager.LoadScene("Game");
         }
 
@@ -91,6 +96,11 @@ public class LevelManager : MonoBehaviour
     IEnumerator NextLevel()
     {
         yield return new WaitForSeconds(2f);
+        for (int i = 0; i < GlobalVars.inactiveProjectiles.Count; i++)
+        {
+            Destroy(GlobalVars.inactiveProjectiles[i]);
+        }
+        GlobalVars.inactiveProjectiles.Clear();
         SceneManager.LoadScene("WinScene");
     }
 

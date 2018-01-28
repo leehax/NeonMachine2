@@ -2863,6 +2863,11 @@ Prefab:
       propertyPath: randomSeed
       value: 1944842154
       objectReference: {fileID: 0}
+    - target: {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: planetCollisionForce
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
   m_IsPrefabParent: 0
@@ -3966,6 +3971,11 @@ Prefab:
     - target: {fileID: 4385544865945824, guid: 71eeec92c05115042929507b9fa44981, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114910686972574322, guid: 71eeec92c05115042929507b9fa44981,
+        type: 2}
+      propertyPath: planetCollisionForce
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71eeec92c05115042929507b9fa44981, type: 2}

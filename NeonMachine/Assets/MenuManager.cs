@@ -116,6 +116,11 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+        }
+
         if (player1Ready && player2Ready)
         {
             if(!counting)
