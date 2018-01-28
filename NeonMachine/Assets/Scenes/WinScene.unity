@@ -631,11 +631,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be9fc1b32f68be40ae8f27c738d7111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 2090513182}
+  player1: {fileID: 834937374}
   player1TextSprite: {fileID: 21300000, guid: 2dc9f616ee36f95428c9667b5997466b, type: 3}
-  player2: {fileID: 834937374}
+  player2: {fileID: 2090513182}
   player2TextSprite: {fileID: 21300000, guid: bf1e4531a7c907849a11cc5bb2bdd8ea, type: 3}
   winnerTextSR: {fileID: 271533085}
+  delayTime: 5
 --- !u!1 &1081922687
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +977,11 @@ Prefab:
     - target: {fileID: 1359998915060098, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212200400425079492, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 50414973179598040, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
