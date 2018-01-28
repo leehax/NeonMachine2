@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -28,6 +30,7 @@ public class LevelManager : MonoBehaviour
     float curAlpha1 = 1.0f;
     float curAlpha2 = 1.0f;
 
+    private bool winnerDecided = false;
 
     // Use this for initialization
     void Start ()
@@ -41,9 +44,33 @@ public class LevelManager : MonoBehaviour
 	void Update ()
 	{
         HUDUpdate();
+
+	    if (player1Variables.GetHealth <= 0.0f
+            && !winnerDecided)
+	    {
+	        GlobalVars.winnerPlayerID = 1;
+	        winnerDecided = true;
 	    
+	    }
+	    if (player2Variables.GetHealth <= 0.0f
+            && !winnerDecided)
+	    {
+	        GlobalVars.winnerPlayerID = 0;
+	        winnerDecided = true;
+	    }
 
+	    if (winnerDecided)
+	    {
+            StartCoroutine(NextLevel());
+	        
+	    }
 
+    }
+
+    IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("WinScene");
     }
 
     void HUDUpdate()

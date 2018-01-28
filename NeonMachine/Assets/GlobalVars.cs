@@ -9,6 +9,8 @@ public class GlobalVars : MonoBehaviour {
 
     public static List<GameObject> inactiveProjectiles = new List<GameObject>();
 
+    public static int winnerPlayerID;
+
 	// Use this for initialization
 	void Start () {
 		

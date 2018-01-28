@@ -69,6 +69,7 @@ public class PlayerInput : MonoBehaviour {
     [HideInInspector]
     public float GetFuel { get { return thrusterFuel; } }
 
+    private Animator anim;
     // Use this for initialization
     void Start ()
 	{
@@ -78,12 +79,14 @@ public class PlayerInput : MonoBehaviour {
 	    particleSys=GetComponent<ParticleSystem>();
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
-        print(health);
+	    anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+        anim.SetBool("IsDead",health<=0.0f);
+
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
 	    shootCooldown -= Time.deltaTime;
@@ -216,7 +219,7 @@ public class PlayerInput : MonoBehaviour {
                 other.gameObject.SetActive(false);
 
                 health -= 0.5f;
-
+               
                 if (Random.value < .4f)
                 {
                     GameObject instance = Instantiate(ripple);
