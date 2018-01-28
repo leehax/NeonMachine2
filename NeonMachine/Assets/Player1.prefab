@@ -118,6 +118,7 @@ MonoBehaviour:
   spreadInDegrees: 30
   amount: 50
   speed: 30
+  ttl: 1.5
   offset: 1.5
   emittedObject: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
     type: 2}
@@ -186,7 +187,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -85541504
+  randomSeed: 51015185
   InitialModule:
     serializedVersion: 3
     enabled: 1

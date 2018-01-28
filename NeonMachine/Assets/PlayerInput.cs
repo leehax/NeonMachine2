@@ -29,6 +29,8 @@ public class PlayerInput : MonoBehaviour {
     [SerializeField]
     float speed = 10.0f;
     [SerializeField]
+    float ttl = 1.5f;
+    [SerializeField]
     float offset = 0.2f;
     [SerializeField]
     GameObject emittedObject;
@@ -67,6 +69,7 @@ public class PlayerInput : MonoBehaviour {
     [HideInInspector]
     public float GetFuel { get { return thrusterFuel; } }
 
+    private Animator anim;
     // Use this for initialization
     void Start ()
 	{
@@ -76,12 +79,14 @@ public class PlayerInput : MonoBehaviour {
 	    particleSys=GetComponent<ParticleSystem>();
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
-        print(health);
+	    anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+        anim.SetBool("IsDead",health<=0.0f);
+
 	    direction.x = Input.GetAxis("HorizontalGamePad" + playerID);
 	    direction.y = Input.GetAxis("VerticalGamePad" + playerID);
 	    shootCooldown -= Time.deltaTime;
@@ -155,9 +160,19 @@ public class PlayerInput : MonoBehaviour {
 
         for (int i = 0; i < amount; i++)
         {
-            GameObject instance = Instantiate(emittedObject);
+            GameObject instance;
+            if (GlobalVars.inactiveProjectiles.Count > 0)
+            {
+                instance = GlobalVars.inactiveProjectiles[0];
+                GlobalVars.inactiveProjectiles.RemoveAt(0);
+                instance.gameObject.SetActive(true);
+            }
+            else
+            {
+                instance = Instantiate(emittedObject);
+            }
             instance.gameObject.GetComponent<SpriteRenderer>().color = color;
-            
+            instance.GetComponent<ProjectileScript>().ttl = ttl;
             instance.transform.position = position + new Vector3(headingVector.x * offset, headingVector.y * offset, 0);
             instance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (tempRotation + (spread / amount) * i)) * Mathf.Rad2Deg);
             instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(tempRotation + (spread / amount) * i), Mathf.Sin(tempRotation + (spread / amount) * i)) * speed;
@@ -200,9 +215,11 @@ public class PlayerInput : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<ProjectileScript>().ownerID != playerID)
             {
-                Destroy(other.gameObject);
-                health -= 0.5f;
+                GlobalVars.inactiveProjectiles.Add(other.gameObject);
+                other.gameObject.SetActive(false);
 
+                health -= 0.5f;
+               
                 if (Random.value < .4f)
                 {
                     GameObject instance = Instantiate(ripple);
