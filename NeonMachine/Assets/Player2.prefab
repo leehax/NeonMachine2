@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 212200400425079492}
   - component: {fileID: 50414973179598040}
   - component: {fileID: 114495928870683912}
-  - component: {fileID: 61669619942307342}
   - component: {fileID: 95002948693509596}
   - component: {fileID: 198573068472259712}
   - component: {fileID: 199130685119821700}
+  - component: {fileID: 70740226404723700}
   m_Layer: 10
   m_Name: Player2
   m_TagString: Untagged
@@ -40,8 +40,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359998915060098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.1, y: 2.79, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 5.33, y: -1.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -66,8 +66,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61669619942307342
-BoxCollider2D:
+--- !u!70 &70740226404723700
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -78,19 +78,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.7, y: 2}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.6, y: 0}
+  m_Size: {x: 3.75, y: 1.5}
+  m_Direction: 1
 --- !u!95 &95002948693509596
 Animator:
   serializedVersion: 3
@@ -120,22 +110,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
-  maxHealth: 0
-  planetCollisionForce: 60
+  maxHealth: 100
+  planetCollisionForce: 25
   burstAmount: 4
   burstDelay: 0.15
-  cooldown: 5
-  spreadInDegrees: 22.5
-  amount: 30
-  speed: 15
-  offset: 0.8
+  cooldown: 2.5
+  spreadInDegrees: 30
+  amount: 50
+  speed: 30
+  offset: 1.5
   emittedObject: {fileID: 1546327178280012, guid: 658bdb1f9d4958243993192ae304f799,
     type: 2}
   ripple: {fileID: 1571557450000666, guid: 8d1a7eac94bcd974ca3b08572a6d90bf, type: 2}
   color: {r: 1, g: 0.612, b: 0, a: 1}
-  maxThrusterFuel: 3
+  maxThrusterFuel: 100
   thrusterCoolDown: 2
-  forceMult: 0.05
+  forceMult: 0.04
 --- !u!198 &198573068472259712
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -196,7 +186,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1812046334
+  randomSeed: 1012498258
   InitialModule:
     serializedVersion: 3
     enabled: 1

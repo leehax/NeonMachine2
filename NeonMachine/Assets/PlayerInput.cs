@@ -90,6 +90,7 @@ public class PlayerInput : MonoBehaviour {
 	    if (!isBoosting)
 	    {
 	        thrusterFuel += Time.deltaTime * 45;
+            thrusterFuel = Mathf.Clamp(thrusterFuel, 0, maxThrusterFuel);
 	        particleSys.Stop();
 
 	    }
