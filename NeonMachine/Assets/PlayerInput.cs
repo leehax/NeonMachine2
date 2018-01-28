@@ -99,10 +99,12 @@ public class PlayerInput : MonoBehaviour {
         collisionSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
         collisionSrc.playOnAwake = false;
         collisionSrc.clip = collisionClip;
+        collisionSrc.volume = 0.6f;
 
         primaryFireSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
         primaryFireSrc.playOnAwake = false;
         primaryFireSrc.clip = primaryFireClip;
+        primaryFireSrc.volume = 0.3f;
 
         deathSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
         deathSrc.playOnAwake = false;

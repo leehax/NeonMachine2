@@ -59,6 +59,11 @@ public class LevelManager : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Game");
+        }
+
         HUDUpdate();
 
 	    if (player1Variables.GetHealth <= 0.0f

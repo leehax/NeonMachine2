@@ -983,6 +983,11 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 212200400425079492, guid: 049e0f2715be9ae41a66274ac415aa49,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 50414973179598040, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
     - {fileID: 114495928870683912, guid: 049e0f2715be9ae41a66274ac415aa49, type: 2}
