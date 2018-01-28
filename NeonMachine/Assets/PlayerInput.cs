@@ -70,6 +70,18 @@ public class PlayerInput : MonoBehaviour {
     public float GetFuel { get { return thrusterFuel; } }
 
     private Animator anim;
+
+    [SerializeField]
+    AudioClip collisionClip;
+    [SerializeField]
+    AudioClip primaryFireClip;
+    [SerializeField]
+    AudioClip deathClip;
+
+    AudioSource collisionSrc;
+    AudioSource primaryFireSrc;
+    AudioSource deathSrc;
+
     // Use this for initialization
     void Start ()
 	{
@@ -80,7 +92,19 @@ public class PlayerInput : MonoBehaviour {
         direction = new Vector2(0,0);
 	    scale = Mathf.Max(transform.localScale.x, transform.localScale.y);
 	    anim = GetComponent<Animator>();
-	}
+
+        collisionSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
+        collisionSrc.playOnAwake = false;
+        collisionSrc.clip = collisionClip;
+
+        primaryFireSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
+        primaryFireSrc.playOnAwake = false;
+        primaryFireSrc.clip = primaryFireClip;
+
+        deathSrc = gameObject.AddComponent<AudioSource>() as AudioSource;
+        deathSrc.playOnAwake = false;
+        deathSrc.clip = deathClip;
+    }
 	
 	// Update is called once per frame
 	void Update ()
