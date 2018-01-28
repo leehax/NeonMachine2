@@ -10,9 +10,10 @@ public class PlayerInput : MonoBehaviour {
     private ParticleSystem particleSys;
     [SerializeField]
     int playerID;
-
     [SerializeField]
-    float planetCollisionForce = 30.0f;
+    float maxHealth;
+    [SerializeField]
+    float planetCollisionForce = 200.0f;
 
     [Header("Shooting")]
     [SerializeField]
@@ -38,7 +39,7 @@ public class PlayerInput : MonoBehaviour {
 
     [Header("Thruster")]
     [SerializeField]
-    float maxThrusterFuel = 3.0f;
+    float maxThrusterFuel = 100.0f;
     [SerializeField]
     float thrusterCoolDown;
     [SerializeField]
@@ -47,7 +48,7 @@ public class PlayerInput : MonoBehaviour {
     Vector2 direction;
 
     float maxVelocity = 5.0f;
-    float thrusterFuel = 1.0f;
+    float thrusterFuel;
     float shootCooldown = 0.0f;
     float scale;
     float currentThrusterCoolDown=0.0f;
@@ -57,10 +58,20 @@ public class PlayerInput : MonoBehaviour {
     Vector2 headingVector;
     float rotation;
     Vector3 position;
+    float health;
+
+    [HideInInspector]
+    public bool CanShoot { get { return shootCooldown <= 0.0f; } }
+    [HideInInspector]
+    public float GetHealth { get { return health; } }
+    [HideInInspector]
+    public float GetFuel { get { return thrusterFuel; } }
 
     // Use this for initialization
     void Start ()
 	{
+        health = maxHealth;
+        thrusterFuel = maxThrusterFuel;
 	    rb = GetComponent<Rigidbody2D>();
 	    particleSys=GetComponent<ParticleSystem>();
         direction = new Vector2(0,0);
@@ -78,7 +89,7 @@ public class PlayerInput : MonoBehaviour {
 
 	    if (!isBoosting)
 	    {
-	        thrusterFuel += Time.deltaTime * 10;
+	        thrusterFuel += Time.deltaTime * 45;
 	        particleSys.Stop();
 
 	    }
@@ -149,6 +160,7 @@ public class PlayerInput : MonoBehaviour {
             instance.transform.position = position + new Vector3(headingVector.x * offset, headingVector.y * offset, 0);
             instance.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (tempRotation + (spread / amount) * i)) * Mathf.Rad2Deg);
             instance.GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Cos(tempRotation + (spread / amount) * i), Mathf.Sin(tempRotation + (spread / amount) * i)) * speed;
+            instance.GetComponent<ProjectileScript>().ownerID = playerID;
         }
         GameObject instance2 = Instantiate(ripple);
         instance2.transform.position = transform.position + new Vector3(headingVector.x * offset, headingVector.y * offset, -GlobalVars.RippleOffset);
@@ -182,6 +194,26 @@ public class PlayerInput : MonoBehaviour {
             rippleInst.endRadius = 1.5f;
             rippleInst.startDistortion = 9.0f;
             rippleInst.endDistortion = 0.0f;
+        }
+        else if (other.gameObject.layer == 8)
+        {
+            if (other.gameObject.GetComponent<ProjectileScript>().ownerID != playerID)
+            {
+                Destroy(other.gameObject);
+                health -= 0.5f;
+
+                if (Random.value < .4f)
+                {
+                    GameObject instance = Instantiate(ripple);
+                    instance.transform.position = other.transform.position + new Vector3(0, 0, -GlobalVars.RippleOffset);
+                    Ripple rippleInst = instance.GetComponent<Ripple>();
+                    rippleInst.ttl = 0.1f + Random.value * 0.2f;
+                    rippleInst.startRadius = 0.02f;
+                    rippleInst.endRadius = 0.2f + Random.value * 0.1f;
+                    rippleInst.startDistortion = 3.0f + Random.value * 2.0f;
+                    rippleInst.endDistortion = 0.0f;
+                }
+            }
         }
     }
 }
