@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1732643692}
-  gameSceneName: tobestest
+  gameSceneName: Game
   smoothTime: 0.15
   mainCanvas: {fileID: 2121605528}
   mainButtons:
@@ -4980,7 +4980,7 @@ Prefab:
     - target: {fileID: 212418511373194392, guid: 871abd276477c964ba30ca75df4298f5,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 23
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 871abd276477c964ba30ca75df4298f5, type: 2}
